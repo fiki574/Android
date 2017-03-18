@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:text="IP of PC that is running 'PopcornTimeRemoteServer.exe'"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView1" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/IP" />
+    <Button
+        android:text="CONNECT"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Connect" />
+    <Button
+        android:text="PAUSE"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Pause" />
+    <Button
+        android:text="SCREEN SIZE"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Screen" />
+</LinearLayout>
