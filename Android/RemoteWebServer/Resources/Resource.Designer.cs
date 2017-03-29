@@ -60,11 +60,14 @@ namespace RemoteWebServer
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f050001
-			public const int Output = 2131034113;
-			
 			// aapt resource value: 0x7f050000
-			public const int StartServer = 2131034112;
+			public const int Help = 2131034112;
+			
+			// aapt resource value: 0x7f050002
+			public const int Output = 2131034114;
+			
+			// aapt resource value: 0x7f050001
+			public const int StartServer = 2131034113;
 			
 			static Id()
 			{

@@ -3,6 +3,12 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Help"
+        android:scrollbars="vertical"
+        android:maxLines="25" />
     <Button
         android:id="@+id/StartServer"
         android:layout_width="match_parent"
@@ -13,5 +19,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/Output"
         android:scrollbars="vertical"
-        android:maxLines="25" />
+        android:maxLines="10"
+        android:gravity="bottom" />
 </LinearLayout>

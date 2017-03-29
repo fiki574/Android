@@ -1,8 +1,6 @@
 ﻿using Android.App;
 using Android.Widget;
 using Android.OS;
-using System.Net;
-using System.Net.Sockets;
 
 namespace RemoteWebServer
 {
@@ -10,7 +8,9 @@ namespace RemoteWebServer
     public class MainActivity : Activity
     {
         public static MainActivityHandler handler;
+        public int scroll;
         public Button Start;
+        public TextView Help;
         public TextView Output;
         public HttpServer server;
 
@@ -19,10 +19,22 @@ namespace RemoteWebServer
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
             handler = new MainActivityHandler(this);
+            Window.SetFlags(Android.Views.WindowManagerFlags.KeepScreenOn, Android.Views.WindowManagerFlags.KeepScreenOn);
 
+            scroll = 0;
             Start = FindViewById<Button>(Resource.Id.StartServer);
+            Help = FindViewById<TextView>(Resource.Id.Help);
             Output = FindViewById<TextView>(Resource.Id.Output);
+            Help.MovementMethod = new Android.Text.Method.ScrollingMovementMethod();
             Output.MovementMethod = new Android.Text.Method.ScrollingMovementMethod();
+
+            Help.Text += $"To make this application work properly, you must:\n";
+            Help.Text += $"1. Be connected to your WiFi network\n";
+            Help.Text += $"2. Port forward '8080' port for IP address '{Utilities.GetLocalIP()}'\n";
+            Help.Text += $"3. Put website files in 'Download/Website' directory\n";
+            Help.Text += $"4. Implement HTML images like this:\n<img src=\"http://www.liaise.co.za/img/intro-bg.jpg)\">\n\n";
+            Help.Text += $"If any of the mentioned steps are not done correctly, application will either start and not work properly or give an error!\n\n";
+            Help.Text += $"Recommended free DNS provider: http://www.noip.com/";
 
             Start.Click += delegate 
             {
@@ -30,14 +42,11 @@ namespace RemoteWebServer
                 {
                     if(Start.Text.Contains("START"))
                     {
-                        AddText($"If you're unable to reach the website by trying and using both local and/or public URL, you either haven't port forwarded properly or you're trying to access it from the mobile network (this app works on WiFi strictly)!\n");
-                        AddText($"Due to some Android limitations, HTML's 'img' must have 'src' property set to external URL, meaning your images must be hosted somewhere!\n");
-                        AddText($"The website is loaded from internal storage's 'Download/Website' folder, so make sure you put all your files there!\n");
-                        AddText($"Recommended free DNS provider: http://www.noip.com/\n");
+                        AddText($"While opened, this application prevents your phone from locking/sleeping due to occasional network interruptions which are indeed caused by phone's sleep/lock mode!\n");
                         server = new HttpServer();
                         server.Start();
-                        AddText($"Local URL: {GetLocalIP()}:8080/index.html");
-                        AddText($"Public URL: {GetPublicIP()}:8080/index.html\n");
+                        AddText($"Local URL: {Utilities.GetLocalIP()}:8080/index.html");
+                        AddText($"Public URL: {Utilities.GetPublicIP()}:8080/index.html\n");
                         Start.Text = "STOP MY WEB SERVER";
                     }
                     else if(Start.Text.Contains("STOP"))
@@ -45,6 +54,7 @@ namespace RemoteWebServer
                         server.Stop();
                         Start.Text = "START MY WEB SERVER";
                         Output.Text = "";
+                        scroll = 0;
                     }
                 }
                 catch
@@ -52,44 +62,19 @@ namespace RemoteWebServer
                     ShowAlert("Something went wrong!", "ERROR");
                     Start.Text = "START MY WEB SERVER";
                     Output.Text = "";
+                    scroll = 0;
                 }
             };
         }
 
         public void AddText(string text)
         {
-            Output.Text += text + "\n";
+            Output.Append(text + "\n");
         }
 
         public void ShowAlert(string message, string title)
         {
             new AlertDialog.Builder(this).SetMessage(message).SetTitle(title).Show();
-        }
-
-        public static string GetLocalIP()
-        {
-            var host = Dns.GetHostEntry(Dns.GetHostName());
-            foreach (var ip in host.AddressList)
-                if (ip.AddressFamily == AddressFamily.InterNetwork)
-                    return ip.ToString();
-            return "127.0.0.1";
-        }
-
-        public static string GetPublicIP()
-        {
-            try
-            {
-                return (new WebClient()).DownloadString("http://bot.whatismyipaddress.com/");
-            }
-            catch
-            {
-                return "127.0.0.1";
-            }
-        }
-
-        public static string FormatErrorHtml(string message)
-        {
-            return $"<!DOCTYPE HTML><HTML><HEAD></HEAD><BODY><p style=\"color: red;\">{ message }</p></BODY></HTML>";
         }
     }
 }
