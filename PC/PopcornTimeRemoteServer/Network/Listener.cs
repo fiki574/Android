@@ -17,7 +17,7 @@ namespace PopcornTimeRemoteServer
         public Listener(string ip, int port)
         {
             IPAddress address = IPAddress.Any;
-            Console.WriteLine($"Starting listener at {ip}:{port} <-- use this IP address when connecting through 'PopcornTimeRemote' application");
+            Console.WriteLine($"Starting listener at {ip}:{port} <-- use this IP to connect through Android application");
             try
             {
                 address = IPAddress.Parse(ip);
