@@ -7,6 +7,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PopcornTimeRemote", "Popcor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemoteWebServer", "RemoteWebServer\RemoteWebServer.csproj", "{6C0D9E4D-7A35-4F93-B416-E6763E73A248}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAlbumViewer", "WebAlbumViewer\WebAlbumViewer.csproj", "{91DA75CB-C4B0-4AF4-A860-26FDCB1C93AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Borovje", "Borovje\Borovje.csproj", "{AE409B68-2DD8-46FC-8DB5-03A9417F2E55}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MousePhone", "MousePhone\MousePhone.csproj", "{30F8925E-1F11-4528-9443-687FDAC65BE7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +31,24 @@ Global
 		{6C0D9E4D-7A35-4F93-B416-E6763E73A248}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C0D9E4D-7A35-4F93-B416-E6763E73A248}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6C0D9E4D-7A35-4F93-B416-E6763E73A248}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{91DA75CB-C4B0-4AF4-A860-26FDCB1C93AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91DA75CB-C4B0-4AF4-A860-26FDCB1C93AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91DA75CB-C4B0-4AF4-A860-26FDCB1C93AF}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{91DA75CB-C4B0-4AF4-A860-26FDCB1C93AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91DA75CB-C4B0-4AF4-A860-26FDCB1C93AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91DA75CB-C4B0-4AF4-A860-26FDCB1C93AF}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{AE409B68-2DD8-46FC-8DB5-03A9417F2E55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE409B68-2DD8-46FC-8DB5-03A9417F2E55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE409B68-2DD8-46FC-8DB5-03A9417F2E55}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{AE409B68-2DD8-46FC-8DB5-03A9417F2E55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE409B68-2DD8-46FC-8DB5-03A9417F2E55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE409B68-2DD8-46FC-8DB5-03A9417F2E55}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{30F8925E-1F11-4528-9443-687FDAC65BE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30F8925E-1F11-4528-9443-687FDAC65BE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30F8925E-1F11-4528-9443-687FDAC65BE7}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{30F8925E-1F11-4528-9443-687FDAC65BE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30F8925E-1F11-4528-9443-687FDAC65BE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30F8925E-1F11-4528-9443-687FDAC65BE7}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
