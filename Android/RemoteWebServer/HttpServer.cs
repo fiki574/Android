@@ -86,8 +86,11 @@ namespace RemoteWebServer
                 context.Response.ContentType = MIME.GetMimeType(Path.GetExtension(raw[0]));
                 MainActivity.handler.AddText($"Request: '{raw[0]}' from '{context.Request.RemoteEndPoint.Address.ToString()}'");
                 string path = files.Find(f => f.ToString().Substring(DownloadPath.Length) == raw[0]);
-                using (StreamReader sr = new StreamReader(File.OpenRead(path)))
-                using (StreamWriter writer = new StreamWriter(context.Response.OutputStream, context.Response.ContentEncoding)) writer.Write(sr.ReadToEnd());
+                int numb = (int)(new FileInfo(path).Length);
+                FileStream fstream = new FileStream(path, FileMode.Open, FileAccess.Read);
+                BinaryReader br = new BinaryReader(fstream);
+                byte[] output = br.ReadBytes(numb);
+                context.Response.OutputStream.Write(output, 0, numb);
             }
             catch
             {

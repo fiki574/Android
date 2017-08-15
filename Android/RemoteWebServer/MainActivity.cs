@@ -32,7 +32,6 @@ namespace RemoteWebServer
             Help.Text += $"1. Be connected to your WiFi network\n";
             Help.Text += $"2. Port forward '8080' port for IP address '{Utilities.GetLocalIP()}'\n";
             Help.Text += $"3. Put website files in 'Download/Website' directory\n";
-            Help.Text += $"4. Implement HTML/CSS images with external links\n\n";
             Help.Text += $"If any of the mentioned steps are not done correctly, application will either start and not work properly or give an error!\n\n";
             Help.Text += $"Recommended free DNS provider: http://www.noip.com/";
 
