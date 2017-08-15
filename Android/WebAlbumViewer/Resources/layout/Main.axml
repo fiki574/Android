@@ -3,11 +3,44 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
-<Button  
-    android:id="@+id/MyButton"
-    android:layout_width="match_parent" 
-    android:layout_height="wrap_content" 
-    android:text="@string/Hello"
-    />
+    android:minWidth="25px"
+    android:minHeight="25px">
+    <TextView
+        android:text="Choose a mode:"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ChooseAModeText" />
+    <Button
+        android:text="Host"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/HostButton" />
+    <Button
+        android:text="CLIENT"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ClientButton" />
+    <TextView
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Space1" />
+    <TextView
+        android:text="Host mode allows other people to connect to you by either your public IP (remotely, not close to each other) or local IP (if they're on the same network as you) to view your album content."
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/HostModeExplanation" />
+    <TextView
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/SpaceBetweenExplanations" />
+    <TextView
+        android:text="Client mode allows you to view other people's album content by connecting to them by either public or local IP address (depending if they're on the same network as you or you're not even close to each other)."
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ClientModeExplanation" />
 </LinearLayout>
