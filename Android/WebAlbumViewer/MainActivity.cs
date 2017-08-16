@@ -21,7 +21,6 @@ namespace WebAlbumViewer
         public Button Connect;
         public WebView Browser;
         public Button Previous;
-        public Button Next;
         public string URL;
 
         protected override void OnCreate(Bundle bundle)
@@ -56,11 +55,12 @@ namespace WebAlbumViewer
                     {
                         SetContentView(Resource.Layout.Album);
                         Browser = FindViewById<WebView>(Resource.Id.Browser);
-                        Previous = FindViewById<Button>(Resource.Id.Previous);
-                        Next = FindViewById<Button>(Resource.Id.Next);
-                        URL = IPAddress.Text + ":8080";
-                        string filelist = URL + "/files.list";
-                        //TODO
+                        Browser.Settings.JavaScriptEnabled = true;
+                        Browser.SetWebViewClient(new WebViewClient());
+                        URL = "http://" + IPAddress.Text + ":8080";
+                        string filelist = URL + "/files.txt";
+                        Browser.LoadUrl(filelist);
+                        //TODO: rest of this
                     }
                     catch
                     {

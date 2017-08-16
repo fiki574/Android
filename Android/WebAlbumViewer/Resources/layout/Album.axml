@@ -2,33 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <LinearLayout
-        android:orientation="vertical"
-        android:minWidth="25px"
-        android:minHeight="25px"
-        android:layout_width="match_parent"
-        android:layout_height="875px"
-        android:id="@+id/linearLayout1">
-        <WebView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/Browser" />
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/linearLayout2">
-        <Button
-            android:text="Previous"
-            android:layout_width="181.0dp"
-            android:layout_height="match_parent"
-            android:id="@+id/Previous" />
-        <Button
-            android:text="Next"
-            android:layout_width="177.0dp"
-            android:layout_height="match_parent"
-            android:id="@+id/Next" />
-    </LinearLayout>
+    android:layout_height="match_parent"
+    android:minWidth="25px"
+    android:minHeight="25px">
+    <WebView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/Browser" />
 </LinearLayout>
