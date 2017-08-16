@@ -2,6 +2,7 @@
 using Android.App;
 using Android.Content;
 using Android.Runtime;
+using Android.Webkit;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
@@ -18,6 +19,10 @@ namespace WebAlbumViewer
         public HttpServer server;
         public EditText IPAddress;
         public Button Connect;
+        public WebView Browser;
+        public Button Previous;
+        public Button Next;
+        public string URL;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -47,7 +52,20 @@ namespace WebAlbumViewer
 
                 Connect.Click += delegate
                 {
-                    //TODO: Album layout and requests logic
+                    try
+                    {
+                        SetContentView(Resource.Layout.Album);
+                        Browser = FindViewById<WebView>(Resource.Id.Browser);
+                        Previous = FindViewById<Button>(Resource.Id.Previous);
+                        Next = FindViewById<Button>(Resource.Id.Next);
+                        URL = IPAddress.Text + ":8080";
+                        string filelist = URL + "/files.list";
+                        //TODO
+                    }
+                    catch
+                    {
+                        ShowAlert("Failed to connect to host", "ERROR");
+                    }
                 };
             };
         }

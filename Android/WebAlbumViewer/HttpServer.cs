@@ -66,6 +66,7 @@ namespace WebAlbumViewer
             {
                 string[] raw = context.Request.RawUrl.Split('&');
                 if (raw[0] == "/favicon.ico") return;
+                if (raw[0] == "/files.list") return; //TODO
                 MainActivity.handler.AddText($"Request: '{ RemFirstCh(raw[0].Substring(raw[0].LastIndexOf('/'), raw[0].Length - raw[0].LastIndexOf('/'))) }' from {context.Request.RemoteEndPoint.Address.ToString()}");
                 context.Response.ContentEncoding = context.Request.ContentEncoding;
                 context.Response.ContentType = MIME.GetMimeType(Path.GetExtension(raw[0]));
