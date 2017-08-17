@@ -10,6 +10,7 @@ namespace WebAlbumViewer
     {
         public List<string> files;
         public string directory;
+        public string[] valid_extensions = { ".png", ".jpg", ".jpeg", ".bmp", ".gif" }; //NOTE: in future maybe support videos?
         private HttpListener m_listener;
 
         public HttpServer(int port = 8080)
@@ -23,7 +24,7 @@ namespace WebAlbumViewer
                 if (Directory.Exists(directory + "/100ANDRO")) directory += "/100ANDRO";
                 DirectoryInfo dir = new DirectoryInfo(directory);
                 FileInfo[] fs = dir.GetFiles();
-                foreach (FileInfo f in fs) files.Add(f.FullName); //TODO: disallow videos
+                foreach (FileInfo f in fs) if(IsValidExtension(f.Extension)) files.Add(f.FullName);
                 MainActivity.handler.AddText($"Found {files.Count} media files");
             }
             catch
@@ -65,8 +66,9 @@ namespace WebAlbumViewer
             try
             {
                 string[] raw = context.Request.RawUrl.Split('&');
+                string recvip = context.Request.RemoteEndPoint.Address.ToString();
                 if (raw[0] == "/favicon.ico") return;
-                MainActivity.handler.AddText($"Request: '{ RemFirstCh(raw[0].Substring(raw[0].LastIndexOf('/'), raw[0].Length - raw[0].LastIndexOf('/'))) }' from {context.Request.RemoteEndPoint.Address.ToString()}");
+                MainActivity.handler.AddText($"Request: '{ RemFirstCh(raw[0].Substring(raw[0].LastIndexOf('/'), raw[0].Length - raw[0].LastIndexOf('/'))) }' from { recvip }");
                 context.Response.ContentEncoding = context.Request.ContentEncoding;
                 if (raw[0] == "/album.view")
                 {
@@ -75,7 +77,9 @@ namespace WebAlbumViewer
                     string site = html_part1;
                     foreach(string f in files)
                     {
-                        string url = "http://" + Utilities.GetLocalIP() + ":8080" + f; //TODO: decide whether it's public or local IP
+                        string ip = Utilities.GetLocalIP();
+                        if (!AreIPsLocal(ip, recvip)) ip = Utilities.GetPublicIP();
+                        string url = "http://" + ip + ":8080" + f;
                         string pic = "<div style=\"height:80%;width:80%;margin: 0 auto;text-align:center;\"><img src=\"" + url + "\" style=\"height:100%;width:100%;margin: 0 auto;\"></div>";
                         site += pic;
                     }
@@ -110,6 +114,20 @@ namespace WebAlbumViewer
             string newstr = null;
             foreach (char c in str) if (c != '/') newstr += c;
             return newstr;
+        }
+
+        private bool IsValidExtension(string extension)
+        {
+            for (int i = 0; i < valid_extensions.Length; i++) if (valid_extensions[i].ToLowerInvariant() == extension.ToLowerInvariant()) return true;
+            return false;
+        }
+
+        private bool AreIPsLocal(string ip1, string ip2)
+        {
+            string iprange1 = ip1.Split('.')[0] + "." + ip1.Split('.')[1];
+            string iprange2 = ip2.Split('.')[0] + "." + ip2.Split('.')[1];
+            if (iprange1 == iprange2) return true;
+            else return false;
         }
     }
 }

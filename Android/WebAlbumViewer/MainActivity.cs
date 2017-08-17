@@ -37,7 +37,8 @@ namespace WebAlbumViewer
                 server = new HttpServer();
                 server.Start();
                 HostLog.Text += "\nPeople who are currently either not close to you or not connected to the same network as you use this IP address when connecting through client interface:\n" + Utilities.GetPublicIP() + "\n";
-                HostLog.Text += "\nPeople who are currently on the same network as you use this IP address when connecting through the client interface:\n" + Utilities.GetLocalIP() + "\n\nIf you want to stop the server or change the application mode, please close this application and start it again!\n\n";
+                HostLog.Text += "\nPeople who are currently on the same network as you use this IP address when connecting through the client interface:\n" + Utilities.GetLocalIP() + "\n\nIf you want to stop the server or change the application mode, please close this application and start it again!\n";
+                HostLog.Text += "\nYou can also access your Album files from PC by typing this in your URL bar:\nhttp://public_or_local_IP:8080/album.view\n\n";
             };
 
             Client.Click += delegate
