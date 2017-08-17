@@ -23,7 +23,7 @@ namespace WebAlbumViewer
                 if (Directory.Exists(directory + "/100ANDRO")) directory += "/100ANDRO";
                 DirectoryInfo dir = new DirectoryInfo(directory);
                 FileInfo[] fs = dir.GetFiles();
-                foreach (FileInfo f in fs) files.Add(f.FullName);
+                foreach (FileInfo f in fs) files.Add(f.FullName); //TODO: disallow videos
                 MainActivity.handler.AddText($"Found {files.Count} media files");
             }
             catch
@@ -66,56 +66,33 @@ namespace WebAlbumViewer
             {
                 string[] raw = context.Request.RawUrl.Split('&');
                 if (raw[0] == "/favicon.ico") return;
-                //TODO: add IP to Dictionary if its new one
                 MainActivity.handler.AddText($"Request: '{ RemFirstCh(raw[0].Substring(raw[0].LastIndexOf('/'), raw[0].Length - raw[0].LastIndexOf('/'))) }' from {context.Request.RemoteEndPoint.Address.ToString()}");
                 context.Response.ContentEncoding = context.Request.ContentEncoding;
-                if (raw[0] == "/files.txt")
+                if (raw[0] == "/album.view")
                 {
-                    string longline = null;
-                    foreach(string f in files) longline += f + "&";
-                    byte[] output = System.Text.Encoding.ASCII.GetBytes(longline);
-                    context.Response.ContentType = MIME.GetMimeType(".txt");
+                    string html_part1 = "<!DOCTYPE html><html><head><meta charset=\"utf-8\"></head><body style=\"width:100%;height:100%;margin: 0 auto;\">";
+                    string html_part2 = "</body></html>";
+                    string site = html_part1;
+                    foreach(string f in files)
+                    {
+                        string url = "http://" + Utilities.GetLocalIP() + ":8080" + f; //TODO: decide whether it's public or local IP
+                        string pic = "<div style=\"height:80%;width:80%;margin: 0 auto;text-align:center;\"><img src=\"" + url + "\" style=\"height:100%;width:100%;margin: 0 auto;\"></div>";
+                        site += pic;
+                    }
+                    site += html_part2;
+                    byte[] output = System.Text.Encoding.ASCII.GetBytes(site);
+                    context.Response.ContentType = MIME.GetMimeType(".html");
                     context.Response.OutputStream.Write(output, 0, output.Length);
-                }
-                else if(raw[0] == "/next")
-                {
-                    //TODO: switch to picture and count the position for correct IP
-                }
-                else if(raw[0] == "/previous")
-                {
-                    //TODO: switch to picture and count the position for correct IP
                 }
                 else
                 {
-                    if(raw[0].Contains(".wav"))
-                    {
-                        string path = files.Find(f => f.ToString().Contains(raw[0].Substring(0, raw[0].Length - 4)));
-                        string url = "http://" + Utilities.GetLocalIP() + ":8080" + path; //TODO: decide whether it's public or local IP
-                        string html = "<!DOCTYPE html>" +
-                                      "<html>" +
-                                        "<head>" +
-                                            "<meta charset=\"utf-8\">" +
-                                        "</head>" +
-                                        "<body>" +
-                                            "<img src=\"" + url + "\">" +
-                                            //TODO: add buttons Next and Previous
-                                        "</body>" +
-                                      "</html>";
-
-                        byte[] output = System.Text.Encoding.ASCII.GetBytes(html);
-                        context.Response.ContentType = MIME.GetMimeType(".html");
-                        context.Response.OutputStream.Write(output, 0, output.Length);
-                    }
-                    else
-                    {
-                        string path = files.Find(f => f.ToString().Contains(raw[0]));
-                        FileStream fstream = new FileStream(path, FileMode.Open, FileAccess.Read);
-                        int numb = (int)(new FileInfo(path).Length);
-                        BinaryReader br = new BinaryReader(fstream);
-                        byte[] output = br.ReadBytes(numb);
-                        context.Response.ContentType = MIME.GetMimeType(Path.GetExtension(raw[0]));
-                        context.Response.OutputStream.Write(output, 0, numb);
-                    }                    
+                    string path = files.Find(f => f.ToString().Contains(raw[0]));
+                    FileStream fstream = new FileStream(path, FileMode.Open, FileAccess.Read);
+                    int numb = (int)(new FileInfo(path).Length);
+                    BinaryReader br = new BinaryReader(fstream);
+                    byte[] output = br.ReadBytes(numb);
+                    context.Response.ContentType = MIME.GetMimeType(Path.GetExtension(raw[0]));
+                    context.Response.OutputStream.Write(output, 0, numb);
                 }
             }
             catch

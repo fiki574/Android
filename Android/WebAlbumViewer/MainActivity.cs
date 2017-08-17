@@ -1,7 +1,4 @@
-﻿using System;
-using Android.App;
-using Android.Content;
-using Android.Runtime;
+﻿using Android.App;
 using Android.Webkit;
 using Android.Views;
 using Android.Widget;
@@ -51,28 +48,18 @@ namespace WebAlbumViewer
 
                 Connect.Click += delegate
                 {
-                    try
-                    {
-                        SetContentView(Resource.Layout.Album);
-                        Browser = FindViewById<WebView>(Resource.Id.Browser);
-                        Browser.Settings.JavaScriptEnabled = true;
-                        Browser.SetWebViewClient(new WebViewClient());
-                        URL = "http://" + IPAddress.Text + ":8080";
-                        string filelist = URL + "/files.txt";
-                        Browser.LoadUrl(filelist);
-                        //TODO: rest of this
-                    }
-                    catch
-                    {
-                        ShowAlert("Failed to connect to host", "ERROR");
-                    }
+                    URL = "http://" + IPAddress.Text + ":8080";
+                    string album = URL + "/album.view";
+                    SetContentView(Resource.Layout.Album);
+                    Browser = FindViewById<WebView>(Resource.Id.Browser);
+                    Browser.Settings.JavaScriptEnabled = true;
+                    Browser.Settings.BuiltInZoomControls = true;
+                    Browser.Settings.SetSupportZoom(true);
+                    Browser.Settings.DisplayZoomControls = true;
+                    Browser.SetWebViewClient(new WebViewClient());
+                    Browser.LoadUrl(album);
                 };
             };
-        }
-
-        public void ShowAlert(string message, string title)
-        {
-            new AlertDialog.Builder(this).SetMessage(message).SetTitle(title).Show();
         }
     }
 }
