@@ -9,9 +9,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::Android.Runtime.ResourceDesignerAttribute("Borovje.Resource", IsApplication=true)]
+[assembly: global::Android.Runtime.ResourceDesignerAttribute("LocalForgeB.Resource", IsApplication=true)]
 
-namespace Borovje
+namespace LocalForgeB
 {
 	
 	
