@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("RemoteWebServer")]
-[assembly: AssemblyCopyright("Copyright © 2017 Bruno Fištrek")]
+[assembly: AssemblyCopyright("Copyright © 2018/2019 Bruno Fištrek")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
